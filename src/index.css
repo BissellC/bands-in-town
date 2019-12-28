@@ -9,4 +9,191 @@ html {
 body {
   margin: 0;
   min-height: 100%;
+  background-color: rgb(237, 237, 237);
+  font-family: 'Varela Round', sans-serif;
+}
+
+header {
+  text-align: center;
+  padding: 0.8rem;
+  background-color: rgb(28, 180, 178);
+  color: white;
+  font-size: 13px;
+  line-height: 1.4rem;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0.5rem;
+}
+
+.nav-title-container {
+  display: flex;
+}
+
+input {
+  padding: 0.6rem;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  font-weight: 500;
+  padding-right: 25%;
+}
+
+::placeholder {
+  color: rgb(143, 143, 143);
+}
+
+.popular-events {
+  background-color: white;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+}
+.popular-events h1 {
+  margin: 0.5rem;
+  margin-left: 0;
+}
+
+.popular-event {
+  width: 150px;
+  box-shadow: 0px 10px 22px 6px rgba(241, 241, 241, 1);
+  border-radius: 5px;
+  position: relative;
+  height: 250px;
+}
+
+.popular-event-artist-pic {
+  width: 100%;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.popular-event-date {
+  position: absolute;
+  top: 95px;
+  left: 110px;
+
+  font-size: 8px;
+  background-color: white;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.1rem;
+  border-radius: 3px;
+}
+
+.popular-day-of-week,
+.popular-day,
+.popular-month {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.popular-day-of-week {
+  font-size: 6px;
+  text-align: center;
+  color: rgb(143, 143, 143);
+}
+
+.popular-day {
+  text-align: center;
+  font-size: 14px;
+  color: rgb(28, 180, 178);
+}
+
+.popular-month {
+  font-size: 7px;
+  color: rgb(28, 180, 178);
+}
+
+.popular-event-artist-name {
+  color: rgb(28, 180, 178);
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+}
+.popular-event-venue {
+  margin-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+.events-near-you {
+  background-color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+select {
+  border: 1px solid rgb(28, 180, 178);
+  padding: 0.5rem;
+  background-color: white;
+  margin-right: 0.5rem;
+  padding-right: 0;
+  color: rgb(28, 180, 178);
+  text-align: center;
+}
+
+option {
+  text-align: center;
+}
+
+.event-near {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(236, 236, 236);
+  justify-content: space-between;
+}
+
+.event-near img {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+}
+
+.near-info {
+  margin: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+.near-info p {
+  margin: 0.5rem;
+}
+
+.near-artist-name {
+  color: rgb(28, 180, 178);
+}
+
+.near-city {
+  color: rgb(143, 143, 143);
+  font-weight: lighter;
+}
+.near-main {
+  display: flex;
+}
+
+.near-date {
+  text-align: center;
+  color: rgb(28, 180, 178);
+}
+
+.near-month {
+  font-size: 11px;
+  margin-bottom: 0.25rem;
+}
+
+.near-day {
+  font-size: 22px;
+  margin: 0;
+}
+
+.dropdowns {
+  margin-bottom: 1rem;
+}
+
+.events-near-you h1 {
+  margin-top: 0.5rem;
 }
