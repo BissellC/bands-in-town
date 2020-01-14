@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const ArtistPage = () => {
+const ArtistPage = props => {
+  const [artist, setArtist] = useState({})
+  const [events, setEvents] = useState([])
+
+  const getArtist = async () => {
+    const resp = await axios.get(
+      'https://localhost:5001/api/Artist/' + props.match.params.id
+    )
+    console.log(resp.data)
+    setArtist(resp.data)
+    setEvents(resp.data.events)
+  }
+
+  useEffect(() => {
+    getArtist()
+  }, [])
+
   return (
     <>
       <nav>
@@ -10,56 +27,70 @@ const ArtistPage = () => {
         </div>
         <input type="search" placeholder="Search for artists"></input>
         <a href="#">Sign Up</a>
-        <a href="#">Log In</a>
       </nav>
 
       <main>
         <section className="artist-left">
           <section className="artist-card">
-            <img className="artist-pic" />
-            <p className="artist-name">Hello Joyce</p>
-            <p className="tracker-count">"number" Trackers</p>
+            <div className="main-img-container">
+              <img className="artist-pic" src={artist.artistPic} />
+            </div>
+            <p className="artist-name">{artist.artistName}</p>
+            <p className="tracker-count">{artist.followers} Trackers</p>
             <button className="track-artist">Track Artist</button>
           </section>
+
+          <h2 className="about-title">About {artist.artistName}</h2>
           <section className="about">
-            <h2>About "artist name"</h2>
-            <p className="artist=genres">Genres:</p>
-            <p className="artist-hometown">HomeTown:</p>
+            <p className="artist-genres">
+              Genres:&nbsp;<div className="normal-text">{artist.genres}</div>
+            </p>
+            <p className="artist-hometown">
+              Hometown:&nbsp;
+              <div className="normal-text">{artist.hometown}</div>
+            </p>
             <a className="artist-site" href="#">
-              www.site.com
+              <div className="link-style">{artist.website}</div>
             </a>
           </section>
         </section>
 
+        <h2 className="about-title">Events in Your Area</h2>
         <section className="artist-right">
           <section className="events-in-area">
-            <p>Events in Your Area</p>
-            <div className="event-card">
-              <div className="event-date">
-                <p className="event-month">May</p>
-                <p className="event-day">31</p>
-              </div>
-              <div className="event-location">
-                <p className="event-city">Tampa,FL</p>
-                <p className="event-venue">
-                  MIDFLORIDA Credit Union Ampitheater
-                </p>
-              </div>
-            </div>
+            {events.map(event => {
+              return (
+                <div className="event-card">
+                  <div className="event-card-left">
+                    <div className="event-date">
+                      <p className="event-month">
+                        {event.month.substring(0, 3).toUpperCase()}
+                      </p>
+                      <p className="event-day">{event.day}</p>
+                      <p className="event-year">{event.year}</p>
+                    </div>
+                    <p className="event-venue">{event.venue.venueName}</p>
+                  </div>
+                  <p className="event-city">Tampa,FL</p>
+                </div>
+              )
+            })}
           </section>
+
+          <h2 className="about-title">Upcoming Events</h2>
           <section className="upcoming-events">
-            <p>Upcoming Events</p>
             <div className="event-card">
-              <div className="event-date">
-                <p className="event-month">May</p>
-                <p className="event-day">31</p>
-              </div>
-              <div className="event-location">
-                <p className="event-city">Tampa,FL</p>
+              <div className="event-card-left">
+                <div className="event-date">
+                  <p className="event-month">May</p>
+                  <p className="event-day">31</p>
+                  <p className="event-year">2019</p>
+                </div>
                 <p className="event-venue">
                   MIDFLORIDA Credit Union Ampitheater
                 </p>
               </div>
+              <p className="event-city">Tampa,FL</p>
             </div>
           </section>
         </section>

@@ -30,6 +30,13 @@ nav {
   padding: 0.5rem;
 }
 
+nav a {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgb(28, 180, 178);
+  text-align: center;
+}
+
 .nav-title-container {
   display: flex;
 }
@@ -39,7 +46,9 @@ input {
   border: 1px solid lightgray;
   border-radius: 3px;
   font-weight: 500;
-  padding-right: 25%;
+  padding-right: 10%;
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
 }
 
 ::placeholder {
@@ -63,16 +72,23 @@ input {
   border-radius: 5px;
   position: relative;
   height: 250px;
+  margin-right: 0.5rem;
+}
+
+.img-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px 3px 0px 0px;
 }
 
 .popular-event-artist-pic {
-  width: 100%;
-  border-radius: 3px 3px 0px 0px;
+  height: 160px;
 }
 
 .popular-event-date {
   position: absolute;
-  top: 95px;
+  top: 105px;
   left: 110px;
 
   font-size: 8px;
@@ -92,7 +108,7 @@ input {
 }
 
 .popular-day-of-week {
-  font-size: 6px;
+  font-size: 8px;
   text-align: center;
   color: rgb(143, 143, 143);
 }
@@ -104,8 +120,9 @@ input {
 }
 
 .popular-month {
-  font-size: 7px;
+  font-size: 8px;
   color: rgb(28, 180, 178);
+  text-align: center;
 }
 
 .popular-event-artist-name {
@@ -127,6 +144,20 @@ input {
   margin: 0.5rem;
 }
 
+.popular-event-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.popular-event-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.popular-event-container a:hover {
+  background-color: rgb(235, 255, 255);
+}
+
 select {
   border: 1px solid rgb(28, 180, 178);
   padding: 0.5rem;
@@ -146,12 +177,21 @@ option {
   align-items: center;
   border-bottom: 1px solid rgb(236, 236, 236);
   justify-content: space-between;
+  padding-bottom: 0.5rem;
 }
 
 .event-near img {
+  border-radius: 5px;
+  height: 100%;
+}
+
+.near-img-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
   width: 80px;
   height: 80px;
-  border-radius: 5px;
 }
 
 .near-info {
@@ -196,4 +236,219 @@ option {
 
 .events-near-you h1 {
   margin-top: 0.5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.artist-left {
+  max-width: 500px;
+  width: 100%;
+}
+
+.artist-card {
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.main-img-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  height: 100px;
+  width: 100px;
+}
+
+.artist-pic {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.about {
+  background-color: white;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.artist-genres {
+  margin-top: 0;
+}
+
+.artist-hometown {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 12px;
+}
+
+.artist-genres,
+.artist-hometown {
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+}
+
+.artist-name {
+  margin-bottom: 0;
+}
+
+.normal-text {
+  font-weight: 100;
+}
+
+.artist-right {
+  max-width: 500px;
+  width: 100%;
+}
+
+.events-in-area {
+  background-color: white;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.upcoming-events {
+  background-color: white;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.about-title {
+  margin: 0.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.4rem;
+  font-size: 12px;
+  color: rgb(143, 143, 143);
+  text-align: center;
+  margin: initial;
+}
+
+.link-style {
+  color: rgb(143, 143, 143);
+}
+
+.artist-site {
+  text-decoration: none;
+}
+
+.artist-site:hover {
+  text-decoration: underline;
+  color: rgb(143, 143, 143);
+}
+
+.event-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 0.5rem;
+  color: rgb(28, 180, 178);
+}
+.event-date p {
+  margin: 0.1rem;
+  font-size: 10px;
+}
+.event-card-left {
+  display: flex;
+  align-items: center;
+}
+
+.event-day {
+  font-size: 20px !important;
+  margin-top: 0 !important;
+}
+
+.event-month {
+  font-size: 13px !important;
+  margin-bottom: 0 !important;
+}
+
+.event-year {
+  margin-top: 0 !important;
+}
+
+.event-venue {
+  color: rgb(143, 143, 143);
+}
+
+.tracker-count {
+  color: rgb(143, 143, 143);
+}
+
+.track-artist {
+  background-color: rgb(28, 180, 178);
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.track-artist:hover {
+  background-color: rgb(67, 230, 228);
+}
+
+.event-info {
+  background-color: white;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 3px;
+}
+
+.container {
+  width: 100%;
+}
+
+.event-date-time {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.date-time {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.date-time p {
+  margin: 0.1rem;
+}
+
+.event-page-location {
+  display: flex;
+  align-items: center;
+}
+
+.event-page-location > div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.event-page-location > div p {
+  margin: 0.1rem;
+}
+
+i {
+  color: rgb(143, 143, 143);
+}
+
+.time {
+  color: rgb(143, 143, 143);
+}
+
+.event-page-venue {
+  color: rgb(28, 180, 178);
 }
