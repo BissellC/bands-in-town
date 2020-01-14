@@ -9,7 +9,6 @@ const ArtistPage = props => {
     const resp = await axios.get(
       'https://localhost:5001/api/Artist/' + props.match.params.id
     )
-    console.log(resp.data)
     setArtist(resp.data)
     setEvents(resp.data.events)
   }
@@ -59,6 +58,32 @@ const ArtistPage = props => {
         <section className="artist-right">
           <section className="events-in-area">
             {events.map(event => {
+              {
+                if (event.venue.city.includes('FL')) {
+                  /* set FL to user state */
+                  return (
+                    <div className="event-card">
+                      <div className="event-card-left">
+                        <div className="event-date">
+                          <p className="event-month">
+                            {event.month.substring(0, 3).toUpperCase()}
+                          </p>
+                          <p className="event-day">{event.day}</p>
+                          <p className="event-year">{event.year}</p>
+                        </div>
+                        <p className="event-venue">{event.venue.venueName}</p>
+                      </div>
+                      <p className="event-city">{event.venue.city}</p>
+                    </div>
+                  )
+                }
+              }
+            })}
+          </section>
+
+          <h2 className="about-title">Upcoming Events</h2>
+          <section className="upcoming-events">
+            {events.map(event => {
               return (
                 <div className="event-card">
                   <div className="event-card-left">
@@ -71,27 +96,10 @@ const ArtistPage = props => {
                     </div>
                     <p className="event-venue">{event.venue.venueName}</p>
                   </div>
-                  <p className="event-city">Tampa,FL</p>
+                  <p className="event-city">{event.venue.city}</p>
                 </div>
               )
             })}
-          </section>
-
-          <h2 className="about-title">Upcoming Events</h2>
-          <section className="upcoming-events">
-            <div className="event-card">
-              <div className="event-card-left">
-                <div className="event-date">
-                  <p className="event-month">May</p>
-                  <p className="event-day">31</p>
-                  <p className="event-year">2019</p>
-                </div>
-                <p className="event-venue">
-                  MIDFLORIDA Credit Union Ampitheater
-                </p>
-              </div>
-              <p className="event-city">Tampa,FL</p>
-            </div>
           </section>
         </section>
       </main>

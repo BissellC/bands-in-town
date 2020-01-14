@@ -44,7 +44,7 @@ const HomePage = () => {
                   {
                     if (event.venue.city.includes('FL')) {
                       return (
-                        <Link to={'/artist/' + artist.id}>
+                        <Link to={'/event/' + event.id}>
                           <section className="popular-event">
                             <div className="img-container">
                               <img
@@ -118,26 +118,34 @@ const HomePage = () => {
           return (
             <>
               {artist.events.map(event => {
-                return (
-                  <section className="event-near">
-                    <div className="near-main">
-                      <div className="near-img-container">
-                        <img className="near-pic" src={artist.artistPic} />
-                      </div>
-                      <div className="near-info">
-                        <p className="near-artist-name">{artist.ArtistName}</p>
-                        <p className="near-venue">{event.venue.venueName}</p>
-                        <p className="near-city">{event.venue.city}</p>
-                      </div>
-                    </div>
-                    <div className="near-date">
-                      <p className="near-month">
-                        {event.month.substring(0, 3).toUpperCase()}
-                      </p>
-                      <p className="near-day">{event.day}</p>
-                    </div>
-                  </section>
-                )
+                {
+                  if (event.venue.city.includes('FL')) {
+                    return (
+                      <section className="event-near">
+                        <div className="near-main">
+                          <div className="near-img-container">
+                            <img className="near-pic" src={artist.artistPic} />
+                          </div>
+                          <div className="near-info">
+                            <p className="near-artist-name">
+                              {artist.ArtistName}
+                            </p>
+                            <p className="near-venue">
+                              {event.venue.venueName}
+                            </p>
+                            <p className="near-city">{event.venue.city}</p>
+                          </div>
+                        </div>
+                        <div className="near-date">
+                          <p className="near-month">
+                            {event.month.substring(0, 3).toUpperCase()}
+                          </p>
+                          <p className="near-day">{event.day}</p>
+                        </div>
+                      </section>
+                    )
+                  }
+                }
               })}
             </>
           )

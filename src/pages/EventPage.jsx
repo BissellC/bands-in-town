@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const EventPage = () => {
+const EventPage = props => {
+  const [event, setEvent] = useState({})
+  const [venue, setVenue] = useState({})
+  const [artistId, setArtistId] = useState()
+  const [artist, setArtist] = useState({})
+
+  const getEvent = async () => {
+    const resp = await axios.get(
+      'https://localhost:5001/api/Event/' + props.match.params.id
+    )
+    console.log(resp.data)
+    setEvent(resp.data)
+    setVenue(resp.data.venue)
+    setArtistId(resp.data.artistId)
+  }
+
+  const getArtist = async () => {
+    const resp = await axios.get(
+      'https://localhost:5001/api/Artist/' + artistId
+    )
+    setArtist(resp.data)
+  }
+
+  useEffect(() => {
+    getEvent()
+  }, [])
+
+  useEffect(() => {
+    getArtist()
+  }, [artistId])
+
   return (
     <>
       <nav>
@@ -16,8 +47,10 @@ const EventPage = () => {
           <section className="artist-left">
             <section className="artist-card">
               <img className="artist-pic" />
-              <p className="artist-name">Hello Joyce</p>
-              <p className="date-venue">Jan 11th 2020 @ Hooch and Hive</p>
+              <p className="artist-name">{artist.artistName}</p>
+              <p className="date-venue">
+                {event.month} {event.day}, {event.year} @ {venue.venueName}
+              </p>
               <button className="track-artist">Track Artist</button>
             </section>
           </section>
@@ -26,7 +59,9 @@ const EventPage = () => {
             <div className="event-date-time">
               <i class="far fa-clock"></i>
               <div className="date-time">
-                <p className="date">Date</p>
+                <p className="date">
+                  {event.dayOfWeek}, {event.month} {event.day}, {event.year}
+                </p>
                 <p className="time">Time</p>
               </div>
             </div>
