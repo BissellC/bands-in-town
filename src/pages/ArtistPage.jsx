@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavBar from '../components/NavBar'
+import { Link } from 'react-router-dom'
 
 const ArtistPage = props => {
   const [artist, setArtist] = useState({})
@@ -22,7 +23,7 @@ const ArtistPage = props => {
     <>
       <NavBar />
 
-      <main>
+      <main className="artist-main">
         <section className="artist-left">
           <section className="artist-card">
             <div className="main-img-container">
@@ -56,19 +57,21 @@ const ArtistPage = props => {
                 if (event.venue.city.includes('FL')) {
                   /* set FL to user state */
                   return (
-                    <div className="event-card">
-                      <div className="event-card-left">
-                        <div className="event-date">
-                          <p className="event-month">
-                            {event.month.substring(0, 3).toUpperCase()}
-                          </p>
-                          <p className="event-day">{event.day}</p>
-                          <p className="event-year">{event.year}</p>
+                    <Link to={'/event/' + event.id}>
+                      <div className="event-card">
+                        <div className="event-card-left">
+                          <div className="event-date">
+                            <p className="event-month">
+                              {event.month.substring(0, 3).toUpperCase()}
+                            </p>
+                            <p className="event-day">{event.day}</p>
+                            <p className="event-year">{event.year}</p>
+                          </div>
+                          <p className="event-venue">{event.venue.venueName}</p>
                         </div>
-                        <p className="event-venue">{event.venue.venueName}</p>
+                        <p className="event-city">{event.venue.city}</p>
                       </div>
-                      <p className="event-city">{event.venue.city}</p>
-                    </div>
+                    </Link>
                   )
                 }
               }
@@ -79,19 +82,21 @@ const ArtistPage = props => {
           <section className="upcoming-events">
             {events.map(event => {
               return (
-                <div className="event-card">
-                  <div className="event-card-left">
-                    <div className="event-date">
-                      <p className="event-month">
-                        {event.month.substring(0, 3).toUpperCase()}
-                      </p>
-                      <p className="event-day">{event.day}</p>
-                      <p className="event-year">{event.year}</p>
+                <Link to={'/event' + event.id}>
+                  <div className="event-card">
+                    <div className="event-card-left">
+                      <div className="event-date">
+                        <p className="event-month">
+                          {event.month.substring(0, 3).toUpperCase()}
+                        </p>
+                        <p className="event-day">{event.day}</p>
+                        <p className="event-year">{event.year}</p>
+                      </div>
+                      <p className="event-venue">{event.venue.venueName}</p>
                     </div>
-                    <p className="event-venue">{event.venue.venueName}</p>
+                    <p className="event-city">{event.venue.city}</p>
                   </div>
-                  <p className="event-city">{event.venue.city}</p>
-                </div>
+                </Link>
               )
             })}
           </section>

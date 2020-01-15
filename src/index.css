@@ -23,9 +23,6 @@ header {
 }
 
 nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: white;
   padding: 0.5rem;
 }
@@ -54,14 +51,37 @@ nav a {
   font-size: 22px;
 }
 
+.non-mobile-search {
+  display: none;
+}
+
+.input-container {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.mobile-search {
+  max-width: 350px;
+  width: 100%;
+}
+
+.nav-top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sign-up {
+}
+
 input {
   padding: 0.6rem;
   border: 1px solid lightgray;
   border-radius: 3px;
   font-weight: 500;
-  padding-right: 10%;
   margin-right: 0.2rem;
   margin-left: 0.2rem;
+  box-shadow: 4px 5px 10px -5px rgba(166, 166, 166, 1);
 }
 
 ::placeholder {
@@ -77,6 +97,12 @@ input {
 .popular-events h1 {
   margin: 0.5rem;
   margin-left: 0;
+}
+
+.popular-event-container {
+  display: flex;
+
+  overflow-x: auto;
 }
 
 .popular-event {
@@ -157,11 +183,6 @@ input {
   margin: 0.5rem;
 }
 
-.popular-event-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .popular-event-container a {
   text-decoration: none;
   color: inherit;
@@ -191,11 +212,29 @@ option {
   border-bottom: 1px solid rgb(236, 236, 236);
   justify-content: space-between;
   padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.event-near-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.event-near:hover {
+  background-color: rgb(235, 255, 255);
+}
+
+.artist-hover:hover {
+  text-decoration: underline;
+}
+
+.near-img-container-container {
+  width: 80px;
 }
 
 .event-near img {
   border-radius: 5px;
-  height: 100%;
+  height: 80px;
 }
 
 .near-img-container {
@@ -203,12 +242,9 @@ option {
   display: flex;
   justify-content: center;
   border-radius: 3px;
-  width: 80px;
-  height: 80px;
 }
 
 .near-info {
-  margin: 0.5rem;
   margin-left: 0.25rem;
 }
 
@@ -236,6 +272,7 @@ option {
 .near-month {
   font-size: 11px;
   margin-bottom: 0.25rem;
+  margin-top: 0;
 }
 
 .near-day {
@@ -251,13 +288,12 @@ option {
   margin-top: 0.5rem;
 }
 
-main {
+.artist-main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .artist-left {
-  max-width: 500px;
   width: 100%;
 }
 
@@ -297,6 +333,7 @@ main {
   background-color: white;
   margin: 0.5rem;
   padding: 1rem;
+  border-radius: 3px;
 }
 
 .artist-genres {
@@ -324,20 +361,20 @@ main {
 }
 
 .artist-right {
-  max-width: 500px;
   width: 100%;
 }
 
-.events-in-area {
-  background-color: white;
-  margin: 0.5rem;
-  padding: 0.5rem;
+.artist-right a {
+  text-decoration: none;
+  color: inherit;
 }
 
+.events-in-area,
 .upcoming-events {
   background-color: white;
   margin: 0.5rem;
   padding: 0.5rem;
+  border-radius: 3px;
 }
 
 .about-title {
@@ -367,8 +404,12 @@ main {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
-  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.event-card:hover {
+  background-color: rgb(235, 255, 255);
 }
 
 .event-date {
@@ -431,12 +472,12 @@ main {
   border-radius: 3px;
 }
 
-.container {
-  width: 100%;
-  max-width: 500px;
+.event-main {
+  margin: 0 auto;
+  max-width: 750px;
 }
 
-.container > div {
+.event-main > div {
   display: flex;
   justify-content: center;
 }
@@ -482,4 +523,30 @@ i {
 
 .event-page-venue {
   color: rgb(28, 180, 178);
+}
+
+@media (min-width: 768px) {
+  .non-mobile-search {
+    display: block;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .mobile-search {
+    display: none;
+  }
+
+  .homepage-main {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  nav {
+    padding-bottom: 0.1rem;
+  }
+
+  .artist-main {
+    width: 750px;
+    margin: 0 auto;
+  }
 }

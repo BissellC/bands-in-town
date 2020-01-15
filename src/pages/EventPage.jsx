@@ -38,47 +38,45 @@ const EventPage = props => {
     <>
       <NavBar />
 
-      <main>
-        <div className="container">
-          <div>
-            <section className="artist-left">
-              <section className="artist-card">
-                <div className="main-img-container">
-                  <img className="artist-pic" src={artist.artistPic} />
-                </div>
-                <p className="artist-name">{artist.artistName}</p>
-                <p className="date-venue">
-                  {event.month} {event.day}, {event.year} @ {venue.venueName}
-                </p>
-                <button className="track-artist">Track Artist</button>
-                <Link className="link-style" to={'/artist/' + artistId}>
-                  View all events by {artist.artistName}
-                </Link>
-              </section>
+      <main className="event-main">
+        <div>
+          <section className="artist-left">
+            <section className="artist-card">
+              <div className="main-img-container">
+                <img className="artist-pic" src={artist.artistPic} />
+              </div>
+              <p className="artist-name">{artist.artistName}</p>
+              <p className="date-venue">
+                {event.month} {event.day}, {event.year} @ {venue.venueName}
+              </p>
+              <button className="track-artist">Track Artist</button>
+              <Link className="link-style" to={'/artist/' + artistId}>
+                View all events by {artist.artistName}
+              </Link>
             </section>
-          </div>
-
-          <section className="event-info">
-            <div className="event-date-time">
-              <i class="far fa-clock"></i>
-              <div className="date-time">
-                <p className="date">
-                  {event.dayOfWeek}, {event.month} {event.day}, {event.year}
-                </p>
-                <p className="time">{event.time}</p>
-              </div>
-            </div>
-            <div className="event-page-location">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>
-                <p className="event-page-venue">{venue.venueName}</p>
-                <p className="event-page-address">
-                  {venue.address} {venue.city}
-                </p>
-              </div>
-            </div>
           </section>
         </div>
+
+        <section className="event-info">
+          <div className="event-date-time">
+            <i class="far fa-clock"></i>
+            <div className="date-time">
+              <p className="date">
+                {event.dayOfWeek}, {event.month} {event.day}, {event.year}
+              </p>
+              <p className="time">{event.time}</p>
+            </div>
+          </div>
+          <div className="event-page-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <p className="event-page-venue">{venue.venueName}</p>
+              <p className="event-page-address">
+                {venue.address} {venue.city}
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   )
