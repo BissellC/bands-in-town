@@ -37,8 +37,21 @@ nav a {
   text-align: center;
 }
 
-.nav-title-container {
+.nav-title-container > a {
   display: flex;
+  color: inherit;
+  align-items: baseline;
+}
+
+.nav-title-container img {
+  height: 20px;
+  width: 20px;
+  margin-right: 0.25rem;
+}
+
+.nav-title {
+  margin: 0;
+  font-size: 22px;
 }
 
 input {
@@ -258,6 +271,14 @@ main {
   margin: 0.5rem;
 }
 
+.artist-card > a {
+  text-decoration: none;
+}
+
+.artist-card > a:hover {
+  text-decoration: underline;
+}
+
 .main-img-container {
   overflow: hidden;
   display: flex;
@@ -396,6 +417,7 @@ main {
   border-radius: 3px;
   padding-left: 2rem;
   padding-right: 2rem;
+  margin-bottom: 1rem;
 }
 
 .track-artist:hover {
@@ -411,6 +433,12 @@ main {
 
 .container {
   width: 100%;
+  max-width: 500px;
+}
+
+.container > div {
+  display: flex;
+  justify-content: center;
 }
 
 .event-date-time {

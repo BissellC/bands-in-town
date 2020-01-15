@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import NavBar from '../components/NavBar'
 
 const EventPage = props => {
   const [event, setEvent] = useState({})
@@ -34,26 +36,27 @@ const EventPage = props => {
 
   return (
     <>
-      <nav>
-        <div className="nav-title-container">
-          <img className="logo" />
-          <p className="nav-title">bandsintown</p>
-        </div>
-        <input type="search" placeholder="Search for artists"></input>
-        <a href="#">Sign Up</a>
-      </nav>
+      <NavBar />
+
       <main>
         <div className="container">
-          <section className="artist-left">
-            <section className="artist-card">
-              <img className="artist-pic" />
-              <p className="artist-name">{artist.artistName}</p>
-              <p className="date-venue">
-                {event.month} {event.day}, {event.year} @ {venue.venueName}
-              </p>
-              <button className="track-artist">Track Artist</button>
+          <div>
+            <section className="artist-left">
+              <section className="artist-card">
+                <div className="main-img-container">
+                  <img className="artist-pic" src={artist.artistPic} />
+                </div>
+                <p className="artist-name">{artist.artistName}</p>
+                <p className="date-venue">
+                  {event.month} {event.day}, {event.year} @ {venue.venueName}
+                </p>
+                <button className="track-artist">Track Artist</button>
+                <Link className="link-style" to={'/artist/' + artistId}>
+                  View all events by {artist.artistName}
+                </Link>
+              </section>
             </section>
-          </section>
+          </div>
 
           <section className="event-info">
             <div className="event-date-time">
@@ -62,15 +65,15 @@ const EventPage = props => {
                 <p className="date">
                   {event.dayOfWeek}, {event.month} {event.day}, {event.year}
                 </p>
-                <p className="time">Time</p>
+                <p className="time">{event.time}</p>
               </div>
             </div>
             <div className="event-page-location">
               <i class="fas fa-map-marker-alt"></i>
               <div>
-                <p className="event-page-venue">Crowbar</p>
+                <p className="event-page-venue">{venue.venueName}</p>
                 <p className="event-page-address">
-                  1001 W Cass St, Tampa, FL 33606
+                  {venue.address} {venue.city}
                 </p>
               </div>
             </div>

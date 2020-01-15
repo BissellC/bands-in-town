@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import HelloWorld from '../components/HelloWorld'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import NavBar from '../components/NavBar'
 
 const HomePage = () => {
   const [artists, setArtists] = useState([])
@@ -20,19 +20,10 @@ const HomePage = () => {
     <>
       <header>
         Find tour dates and live music events for all your favorite bands and
-        artists in your city. Get concert tickets, news and RSVP to shows with
-        Bandsintown
+        artists in your city.
       </header>
-      <nav>
-        <div className="nav-title-container">
-          <img className="logo" />
-          <p className="nav-title">bandsintown</p>
-        </div>
-        <input type="search" placeholder="Search for artists"></input>
-        <div>
-          <a href="#">Sign Up</a>
-        </div>
-      </nav>
+
+      <NavBar />
 
       <section className="popular-events">
         <h1>Popular Events Near "your city"</h1>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import NavBar from '../components/NavBar'
 
 const ArtistPage = props => {
   const [artist, setArtist] = useState({})
@@ -19,14 +20,7 @@ const ArtistPage = props => {
 
   return (
     <>
-      <nav>
-        <div className="nav-title-container">
-          <img className="logo" />
-          <p className="nav-title">bandsintown</p>
-        </div>
-        <input type="search" placeholder="Search for artists"></input>
-        <a href="#">Sign Up</a>
-      </nav>
+      <NavBar />
 
       <main>
         <section className="artist-left">
