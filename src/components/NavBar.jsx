@@ -5,7 +5,8 @@ import axios from 'axios'
 
 const NavBar = () => {
   const [results, setResults] = useState([])
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState(0)
+  const [render, setRender] = useState('')
 
   const handleSearch = async () => {
     const resp = await axios.get(
@@ -13,6 +14,9 @@ const NavBar = () => {
     )
     setResults(resp.data)
     console.log(results)
+    if (search.length === 1) {
+      setResults([])
+    }
   }
 
   useEffect(() => {
@@ -28,31 +32,73 @@ const NavBar = () => {
             <p className="nav-title">bandsintown</p>
           </Link>
         </div>
-        <input
-          onChange={e => setSearch(e.target.value)}
-          className="non-mobile-search"
-          type="search"
-          placeholder="Search for artists"
-          list="artists"
-        ></input>
-        <datalist id="artists">
-          {results.map(artist => {
-            return <img src={artist.artistPic} />
-          })}
-        </datalist>
-        <div>
+        <div className="search-container">
+          <input
+            onChange={e => setSearch(e.target.value)}
+            className="non-mobile-search"
+            type="search"
+            placeholder="Search for artists"
+            list="artists"
+          ></input>
+          <div className="results" id="artists">
+            {results.map(artist => {
+              return (
+                <div className="dropdown-item">
+                  <Link to={'/artist/' + artist.id}>
+                    <div className="dropdown-item-container">
+                      <div className="search-img-container">
+                        <img className="search-img" src={artist.artistPic} />
+                      </div>
+                      <div className="search-info-container">
+                        <p className="search-name">{artist.artistName}</p>
+                        <p className="search-followers">
+                          {artist.followers} trackers
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className="auth-container">
           <a className="sign-up" href="#">
             Sign Up
           </a>
+          <a className="log-in" href="/login">
+            Log in
+          </a>
         </div>
       </div>
-      <div className="input-container">
+      <div className="mobile-search-container">
         <input
           onChange={e => setSearch(e.target.value)}
           className="mobile-search"
           type="search"
           placeholder="Search for artists"
         ></input>
+        <div className="mobile-results" id="artists">
+          {results.map(artist => {
+            return (
+              <div className="dropdown-item">
+                <Link to={'/artist/' + artist.id}>
+                  <div className="dropdown-item-container">
+                    <div className="search-img-container">
+                      <img className="search-img" src={artist.artistPic} />
+                    </div>
+                    <div className="search-info-container">
+                      <p className="search-name">{artist.artistName}</p>
+                      <p className="search-followers">
+                        {artist.followers} trackers
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </nav>
   )

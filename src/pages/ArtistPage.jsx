@@ -6,6 +6,20 @@ import { Link } from 'react-router-dom'
 const ArtistPage = props => {
   const [artist, setArtist] = useState({})
   const [events, setEvents] = useState([])
+  const [user, setUser] = useState({})
+  const token = localStorage.getItem('token')
+  const userId = localStorage.getItem('userId')
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  }
+
+  const getUserInfo = async () => {
+    const resp = await axios.get(
+      'https://localhost:5001/api/User/' + userId,
+      config
+    )
+    setUser(resp.data)
+  }
 
   const getArtist = async () => {
     const resp = await axios.get(
@@ -15,8 +29,19 @@ const ArtistPage = props => {
     setEvents(resp.data.events)
   }
 
+  const trackArtist = async () => {
+    console.log(userId)
+    const resp = await axios.post('https://localhost:5001/api/TrackArtist/', {
+      id: 0,
+      userId: parseInt(userId),
+      artistId: artist.id,
+    })
+    console.log(resp.data)
+  }
+
   useEffect(() => {
     getArtist()
+    getUserInfo()
   }, [])
 
   return (
@@ -31,7 +56,9 @@ const ArtistPage = props => {
             </div>
             <p className="artist-name">{artist.artistName}</p>
             <p className="tracker-count">{artist.followers} Trackers</p>
-            <button className="track-artist">Track Artist</button>
+            <button onClick={trackArtist} className="track-artist">
+              Track Artist
+            </button>
           </section>
 
           <h2 className="about-title">About {artist.artistName}</h2>
@@ -54,7 +81,7 @@ const ArtistPage = props => {
           <section className="events-in-area">
             {events.map(event => {
               {
-                if (event.venue.city.includes('FL')) {
+                if (event.venue.city.includes(user.state)) {
                   /* set FL to user state */
                   return (
                     <Link to={'/event/' + event.id}>
@@ -78,11 +105,11 @@ const ArtistPage = props => {
             })}
           </section>
 
-          <h2 className="about-title">Upcoming Events</h2>
+          <h2 className="about-title">All Upcoming Events</h2>
           <section className="upcoming-events">
             {events.map(event => {
               return (
-                <Link to={'/event' + event.id}>
+                <Link to={'/event/' + event.id}>
                   <div className="event-card">
                     <div className="event-card-left">
                       <div className="event-date">
