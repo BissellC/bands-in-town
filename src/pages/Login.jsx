@@ -3,7 +3,7 @@ import axios from 'axios'
 import NavBar from '../components/NavBar'
 import { Redirect } from 'react-router-dom'
 
-const Login = () => {
+const Login = props => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [id, setId] = useState()
@@ -16,9 +16,10 @@ const Login = () => {
       password: password,
     })
     if (resp.status === 200) {
-      setId(resp.data.userId)
       localStorage.setItem('userId', resp.data.userId)
       localStorage.setItem('token', resp.data.token)
+      setId(resp.data.userId)
+      props.setIsAuthed(true)
     }
     console.log(resp.data)
   }
@@ -33,21 +34,23 @@ const Login = () => {
     <Redirect to={`/user/${id}`} />
   ) : (
     <>
-      <NavBar />
-      <main>
-        <form onSubmit={handleLogin}>
-          <input
-            onChange={e => setUsername(e.target.value)}
-            placeholder="username"
-          ></input>
-          <input
-            type="password"
-            onChange={e => setPassword(e.target.value)}
-            placeholder="password"
-          ></input>
-          <button>Login</button>
-        </form>
-      </main>
+      <section className="login-main-container">
+        <p className="welcome-back">Welcome back!</p>
+        <main className="login-main">
+          <form className="login-form" onSubmit={handleLogin}>
+            <input
+              onChange={e => setUsername(e.target.value)}
+              placeholder="username"
+            ></input>
+            <input
+              type="password"
+              onChange={e => setPassword(e.target.value)}
+              placeholder="password"
+            ></input>
+            <button className="login-button">Login</button>
+          </form>
+        </main>
+      </section>
     </>
   )
 }

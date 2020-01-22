@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 import logo from '../images/bands-in-town-logo.svg'
 import axios from 'axios'
 
-const NavBar = () => {
+const NavBar = props => {
   const [results, setResults] = useState([])
   const [search, setSearch] = useState(0)
-  const [render, setRender] = useState('')
+  const [user, setUser] = useState({})
+  const token = localStorage.getItem('token')
+  const userId = localStorage.getItem('userId')
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  }
 
   const handleSearch = async () => {
     const resp = await axios.get(
@@ -19,9 +24,21 @@ const NavBar = () => {
     }
   }
 
+  const getUserInfo = async () => {
+    const resp = await axios.get(
+      'https://localhost:5001/api/User/' + userId,
+      config
+    )
+    setUser(resp.data)
+  }
+
   useEffect(() => {
     handleSearch()
   }, [search])
+
+  useEffect(() => {
+    getUserInfo()
+  }, [userId])
 
   return (
     <nav>
@@ -62,14 +79,26 @@ const NavBar = () => {
             })}
           </div>
         </div>
-        <div className="auth-container">
-          <a className="sign-up" href="#">
-            Sign Up
-          </a>
-          <a className="log-in" href="/login">
-            Log in
-          </a>
-        </div>
+        {props.isAuthed ? (
+          <>
+            <div className="auth-container">
+              <Link className="sign-in" to={'/user/' + user.id}>
+                {user.username}'s Profile
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="auth-container">
+              <Link className="sign-up" to="/signup">
+                Sign Up
+              </Link>
+              <Link className="log-in" to="/login">
+                Log in
+              </Link>
+            </div>
+          </>
+        )}
       </div>
       <div className="mobile-search-container">
         <input

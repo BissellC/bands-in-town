@@ -36,18 +36,35 @@ const ArtistPage = props => {
       userId: parseInt(userId),
       artistId: artist.id,
     })
-    console.log(resp.data)
+    if (resp.status === 201) {
+      updateTrackerCount()
+    }
+  }
+
+  const updateTrackerCount = async () => {
+    const resp = await axios.put(
+      'https://localhost:5001/api/Artist/' + props.match.params.id,
+      {
+        id: artist.id,
+        artistName: artist.artistName,
+        genres: artist.genres,
+        mainGenre: artist.mainGenre,
+        hometown: artist.hometown,
+        website: artist.website,
+        artistPic: artist.artistPic,
+        followers: artist.followers + 1,
+      }
+    )
+    getArtist()
   }
 
   useEffect(() => {
     getArtist()
     getUserInfo()
-  }, [])
+  }, [props.match.params.id])
 
   return (
     <>
-      <NavBar />
-
       <main className="artist-main">
         <section className="artist-left">
           <section className="artist-card">
@@ -70,7 +87,7 @@ const ArtistPage = props => {
               Hometown:&nbsp;
               <div className="normal-text">{artist.hometown}</div>
             </p>
-            <a className="artist-site" href="#">
+            <a className="artist-site" href={artist.website}>
               <div className="link-style">{artist.website}</div>
             </a>
           </section>

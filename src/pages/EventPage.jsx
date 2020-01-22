@@ -36,8 +36,6 @@ const EventPage = props => {
 
   return (
     <>
-      <NavBar />
-
       <main className="event-main">
         <div>
           <section className="artist-left">
@@ -49,7 +47,7 @@ const EventPage = props => {
               <p className="date-venue">
                 {event.month} {event.day}, {event.year} @ {venue.venueName}
               </p>
-              <button className="track-artist">Track Artist</button>
+
               <Link className="link-style" to={'/artist/' + artistId}>
                 View all events by {artist.artistName}
               </Link>

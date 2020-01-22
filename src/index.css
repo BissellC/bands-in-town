@@ -201,7 +201,7 @@ input {
   background-color: rgb(235, 255, 255);
 }
 
-select {
+.genre-select {
   border: 1px solid rgb(28, 180, 178);
   width: 120px;
   height: 40px;
@@ -475,9 +475,6 @@ option {
 .track-artist:hover {
   background-color: rgb(67, 230, 228);
 }
-.track-artist:active {
-  background-color: greenyellow;
-}
 
 .event-info {
   background-color: white;
@@ -597,6 +594,108 @@ i {
   text-align: left;
 }
 
+.artist-list {
+  padding: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  margin: 0.5rem;
+  border-radius: 3px;
+}
+
+.artist-list > h1 {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.artist-list-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.artist-list-item > button {
+  margin-left: 0.5rem;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  padding: 0;
+  background-color: #ff6868;
+  border: 1px solid #ff0000;
+  font-size: 8px;
+  text-align: center;
+}
+
+.main-container {
+  margin: auto 0;
+}
+
+.user-events-header {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.user-events-near-you {
+  background-color: white;
+  border-radius: 3px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  max-width: 750px;
+}
+
+.login-main {
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+  border-radius: 3px;
+  max-width: 500px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form > input {
+  margin-bottom: 0.5rem;
+}
+
+.login-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10rem;
+}
+
+.login-button {
+  border: 1px solid rgb(28, 180, 178);
+  border-radius: 3px;
+  background-color: rgb(67, 230, 228);
+}
+
+.login-button:hover {
+  background-color: rgb(235, 255, 255);
+}
+
+.auth-container {
+  display: flex;
+}
+
+.user-message {
+  text-align: center;
+  color: rgb(143, 143, 143);
+}
+
+form > select {
+  margin-bottom: 0.5rem;
+}
+
+.date-venue {
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .non-mobile-search {
     display: block;
@@ -628,5 +727,20 @@ i {
 
   .mobile-results {
     display: none;
+  }
+
+  .main-container {
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
+  }
+
+  .artist-list {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .user-events-near-you {
+    width: 100%;
   }
 }

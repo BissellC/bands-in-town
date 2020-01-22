@@ -8,7 +8,10 @@ const HomePage = () => {
   const [genre, setGenre] = useState(
     'alternative, country, electronic, hiphop, metal, pop, punk, rb, reggae, rock'
   )
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({
+    username: '',
+    state: 'FL',
+  })
   const userId = localStorage.getItem('userId')
   const token = localStorage.getItem('token')
   const config = {
@@ -29,6 +32,8 @@ const HomePage = () => {
     setArtists(resp.data)
   }
 
+  const shuffled = artists.sort(() => 0.5 - Math.random())
+
   useEffect(() => {
     getArtists()
     getUser()
@@ -38,15 +43,14 @@ const HomePage = () => {
     <>
       <header>
         Find tour dates and live music events for all your favorite bands and
-        artists in your city.
+        artists in your area.
       </header>
 
-      <NavBar />
       <main className="homepage-main">
         <section className="popular-events">
           <h1>Popular Events In {user.state}</h1>
           <div className="popular-event-container">
-            {artists.map(artist => {
+            {shuffled.map(artist => {
               return (
                 <>
                   {artist.events.map(event => {
@@ -108,7 +112,10 @@ const HomePage = () => {
         <section className="events-near-you">
           <h1>All Events In {user.state} </h1>
           <section className="dropdowns">
-            <select onChange={e => setGenre(e.target.value)}>
+            <select
+              className="genre-select"
+              onChange={e => setGenre(e.target.value)}
+            >
               <option value="alternative, country, electronic, hiphop, metal, pop, punk, rb, reggae, rock">
                 All Genres
               </option>
