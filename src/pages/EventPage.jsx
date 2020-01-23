@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import NavBar from '../components/NavBar'
 
 const EventPage = props => {
   const [event, setEvent] = useState({})
@@ -11,7 +10,8 @@ const EventPage = props => {
 
   const getEvent = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/Event/' + props.match.params.id
+      'https://bands-in-town-api.herokuapp.com/api/Event/' +
+        props.match.params.id
     )
     console.log(resp.data)
     setEvent(resp.data)
@@ -21,7 +21,7 @@ const EventPage = props => {
 
   const getArtist = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/Artist/' + artistId
+      'https://bands-in-town-api.herokuapp.com/api/Artist/' + artistId
     )
     setArtist(resp.data)
   }

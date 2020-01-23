@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import NavBar from '../components/NavBar'
+
 import { Link } from 'react-router-dom'
 
 const UserPage = props => {
@@ -15,7 +15,8 @@ const UserPage = props => {
 
   const getUserInfo = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/User/' + props.match.params.id,
+      'https://bands-in-town-api.herokuapp.com/api/User/' +
+        props.match.params.id,
       config
     )
     setUser(resp.data)
@@ -23,14 +24,14 @@ const UserPage = props => {
 
   const getUserArtists = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/TrackArtist/user/' + userId
+      'https://bands-in-town-api.herokuapp.com/api/TrackArtist/user/' + userId
     )
     setArtists(resp.data)
   }
 
   const removeArtist = async artist => {
     const resp = await axios.delete(
-      'https://localhost:5001/api/TrackArtist/' + artist.id
+      'https://bands-in-town-api.herokuapp.com/api/TrackArtist/' + artist.id
     )
     setId(resp.data.id)
     updateTrackerCount(artist)
@@ -38,7 +39,7 @@ const UserPage = props => {
 
   const updateTrackerCount = async artist => {
     const resp = await axios.put(
-      'https://localhost:5001/api/Artist/' + artist.artist.id,
+      'https://bands-in-town-api.herokuapp.com/api/Artist/' + artist.artist.id,
       {
         id: artist.artist.id,
         artistName: artist.artist.artistName,

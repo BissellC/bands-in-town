@@ -15,7 +15,7 @@ const NavBar = props => {
 
   const handleSearch = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/Search/?searchTerm=' + search
+      'https://bands-in-town-api.herokuapp.com/api/Search/?searchTerm=' + search
     )
     setResults(resp.data)
     console.log(results)
@@ -26,7 +26,7 @@ const NavBar = props => {
 
   const getUserInfo = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/User/' + userId,
+      'https://bands-in-town-api.herokuapp.com/api/User/' + userId,
       config
     )
     setUser(resp.data)

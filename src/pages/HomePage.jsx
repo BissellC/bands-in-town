@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import NavBar from '../components/NavBar'
 
 const HomePage = () => {
   const [artists, setArtists] = useState([])
@@ -20,14 +19,16 @@ const HomePage = () => {
 
   const getUser = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/User/' + userId,
+      'https://bands-in-town-api.herokuapp.com/api/User/' + userId,
       config
     )
     setUser(resp.data)
   }
 
   const getArtists = async () => {
-    const resp = await axios.get('https://localhost:5001/api/Artist')
+    const resp = await axios.get(
+      'https://bands-in-town-api.herokuapp.com/api/Artist'
+    )
     console.log(resp.data)
     setArtists(resp.data)
   }

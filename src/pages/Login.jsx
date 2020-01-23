@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import NavBar from '../components/NavBar'
 import { Redirect } from 'react-router-dom'
 
 const Login = props => {
@@ -11,10 +10,13 @@ const Login = props => {
 
   const handleLogin = async e => {
     e.preventDefault()
-    const resp = await axios.post('https://localhost:5001/auth/login', {
-      username: username,
-      password: password,
-    })
+    const resp = await axios.post(
+      'https://bands-in-town-api.herokuapp.com/auth/login',
+      {
+        username: username,
+        password: password,
+      }
+    )
     if (resp.status === 200) {
       localStorage.setItem('userId', resp.data.userId)
       localStorage.setItem('token', resp.data.token)

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import NavBar from '../components/NavBar'
 import { Link } from 'react-router-dom'
 
 const ArtistPage = props => {
@@ -15,7 +14,7 @@ const ArtistPage = props => {
 
   const getUserInfo = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/User/' + userId,
+      'https://bands-in-town-api.herokuapp.com/api/User/' + userId,
       config
     )
     setUser(resp.data)
@@ -23,7 +22,8 @@ const ArtistPage = props => {
 
   const getArtist = async () => {
     const resp = await axios.get(
-      'https://localhost:5001/api/Artist/' + props.match.params.id
+      'https://bands-in-town-api.herokuapp.com/api/Artist/' +
+        props.match.params.id
     )
     setArtist(resp.data)
     setEvents(resp.data.events)
@@ -31,11 +31,14 @@ const ArtistPage = props => {
 
   const trackArtist = async () => {
     console.log(userId)
-    const resp = await axios.post('https://localhost:5001/api/TrackArtist/', {
-      id: 0,
-      userId: parseInt(userId),
-      artistId: artist.id,
-    })
+    const resp = await axios.post(
+      'https://bands-in-town-api.herokuapp.com/api/TrackArtist/',
+      {
+        id: 0,
+        userId: parseInt(userId),
+        artistId: artist.id,
+      }
+    )
     if (resp.status === 201) {
       updateTrackerCount()
     }
@@ -43,7 +46,8 @@ const ArtistPage = props => {
 
   const updateTrackerCount = async () => {
     const resp = await axios.put(
-      'https://localhost:5001/api/Artist/' + props.match.params.id,
+      'https://bands-in-town-api.herokuapp.com/api/Artist/' +
+        props.match.params.id,
       {
         id: artist.id,
         artistName: artist.artistName,
