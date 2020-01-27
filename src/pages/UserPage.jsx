@@ -38,7 +38,7 @@ const UserPage = props => {
   }
 
   const updateTrackerCount = async artist => {
-    const resp = await axios.put(
+    await axios.put(
       'https://bands-in-town-api.herokuapp.com/api/Artist/' + artist.artist.id,
       {
         id: artist.artist.id,
@@ -60,15 +60,14 @@ const UserPage = props => {
 
   return (
     <>
-      <p className="user-message">{user.username}'s Tracked Artists</p>
       <section className="main-container">
         <section className="user-events-near-you">
+          <p className="user-message">
+            Events for {user.username}'s tracked artists near {user.state}
+          </p>
           {artists.map(artist => {
             return (
               <>
-                <p className="user-events-header">
-                  Events for {artist.artist.artistName} near you
-                </p>
                 <div className="event-near-container">
                   {artist.artist.events.map(event => {
                     {
@@ -82,6 +81,7 @@ const UserPage = props => {
                                     <img
                                       className="near-pic"
                                       src={artist.artist.artistPic}
+                                      alt={artist.artist.artistName}
                                     />
                                   </div>
                                 </div>

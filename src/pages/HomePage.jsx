@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 
 const HomePage = () => {
   const [artists, setArtists] = useState([])
-  const [genre, setGenre] = useState(
-    'alternative, country, electronic, hiphop, metal, pop, punk, rb, reggae, rock'
-  )
+  const [genre, setGenre] = useState('')
+  const [shuffled, setShuffled] = useState([])
   const [user, setUser] = useState({
     username: '',
     state: 'FL',
@@ -30,14 +29,41 @@ const HomePage = () => {
       'https://bands-in-town-api.herokuapp.com/api/Artist'
     )
     console.log(resp.data)
-    setArtists(resp.data)
+    setArtists(
+      resp.data.sort(function(a, b) {
+        var nameA = a.artistName.toUpperCase()
+        var nameB = b.artistName.toUpperCase()
+        if (nameA < nameB) {
+          return -1
+        }
+        if (nameA > nameB) {
+          return 1
+        }
+      })
+    )
   }
 
-  const shuffled = artists.sort(() => 0.5 - Math.random())
+  const getArtistsShuffled = async () => {
+    const resp = await axios.get(
+      'https://bands-in-town-api.herokuapp.com/api/Artist'
+    )
+    shuffle(resp.data)
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1))
+      let temp = array[i]
+      array[i] = array[j]
+      array[j] = temp
+    }
+    setShuffled(array)
+  }
 
   useEffect(() => {
     getArtists()
     getUser()
+    getArtistsShuffled()
   }, [])
 
   return (
@@ -58,12 +84,13 @@ const HomePage = () => {
                     {
                       if (event.venue.city.includes(user.state)) {
                         return (
-                          <Link to={'/event/' + event.id}>
+                          <Link key={event.id} to={'/event/' + event.id}>
                             <section className="popular-event">
                               <div className="img-container">
                                 <img
                                   className="popular-event-artist-pic"
                                   src={artist.artistPic}
+                                  alt={artist.artistName}
                                 />
                               </div>
                               <div className="popular-event-date">
@@ -117,9 +144,7 @@ const HomePage = () => {
               className="genre-select"
               onChange={e => setGenre(e.target.value)}
             >
-              <option value="alternative, country, electronic, hiphop, metal, pop, punk, rb, reggae, rock">
-                All Genres
-              </option>
+              <option value="">All Genres</option>
               <option value="alternative">Alternative</option>
               <option value="country">Country</option>
               <option value="electronic">Electronic</option>
@@ -127,7 +152,7 @@ const HomePage = () => {
               <option value="metal">Metal</option>
               <option value="pop">Pop</option>
               <option value="punk">Punk</option>
-              <option value="rb">R&B</option>
+              <option value="r&amp;b">R&B</option>
               <option value="reggae">Reggae</option>
               <option value="rock">Rock</option>
             </select>
@@ -135,12 +160,9 @@ const HomePage = () => {
           {artists.length > 0 &&
             artists
               .filter(artist => {
-                console.log({
-                  artist: artist.mainGenre.toLowerCase(),
-                  genre,
-                  toInclude: genre.includes(artist.mainGenre.toLowerCase()),
-                })
-                return genre.includes(artist.mainGenre.toLowerCase())
+                return (
+                  artist.genres.toLowerCase() || artist.mainGenre.toLowerCase()
+                ).includes(genre)
               })
               .map(artist => {
                 return (
@@ -149,7 +171,7 @@ const HomePage = () => {
                       {
                         if (event.venue.city.includes(user.state)) {
                           return (
-                            <Link to={'/event/' + event.id}>
+                            <Link key={event.id} to={'/event/' + event.id}>
                               <section className="event-near">
                                 <div className="near-main">
                                   <div className="near-img-container-container">
@@ -157,6 +179,7 @@ const HomePage = () => {
                                       <img
                                         className="near-pic"
                                         src={artist.artistPic}
+                                        alt={artist.artistName}
                                       />
                                     </div>
                                   </div>

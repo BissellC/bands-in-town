@@ -45,7 +45,7 @@ const ArtistPage = props => {
   }
 
   const updateTrackerCount = async () => {
-    const resp = await axios.put(
+    await axios.put(
       'https://bands-in-town-api.herokuapp.com/api/Artist/' +
         props.match.params.id,
       {
@@ -73,7 +73,11 @@ const ArtistPage = props => {
         <section className="artist-left">
           <section className="artist-card">
             <div className="main-img-container">
-              <img className="artist-pic" src={artist.artistPic} />
+              <img
+                className="artist-pic"
+                src={artist.artistPic}
+                alt={artist.artistName}
+              />
             </div>
             <p className="artist-name">{artist.artistName}</p>
             <p className="tracker-count">{artist.followers} Trackers</p>

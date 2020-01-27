@@ -45,7 +45,7 @@ const NavBar = props => {
       <div className="nav-top-container">
         <div className="nav-title-container">
           <Link to="/">
-            <img className="logo" src={logo} />
+            <img className="logo" src={logo} alt="rock hand sign logo" />
             <p className="nav-title">bandsintown</p>
           </Link>
         </div>
@@ -64,7 +64,11 @@ const NavBar = props => {
                   <Link to={'/artist/' + artist.id}>
                     <div className="dropdown-item-container">
                       <div className="search-img-container">
-                        <img className="search-img" src={artist.artistPic} />
+                        <img
+                          className="search-img"
+                          src={artist.artistPic}
+                          alt={artist.artistName}
+                        />
                       </div>
                       <div className="search-info-container">
                         <p className="search-name">{artist.artistName}</p>
@@ -114,7 +118,11 @@ const NavBar = props => {
                 <Link to={'/artist/' + artist.id}>
                   <div className="dropdown-item-container">
                     <div className="search-img-container">
-                      <img className="search-img" src={artist.artistPic} />
+                      <img
+                        className="search-img"
+                        src={artist.artistPic}
+                        alt={artist.artistName}
+                      />
                     </div>
                     <div className="search-info-container">
                       <p className="search-name">{artist.artistName}</p>

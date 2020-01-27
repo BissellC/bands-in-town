@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ArtistPage from './pages/ArtistPage'
 import EventPage from './pages/EventPage'
 import HomePage from './pages/HomePage'
@@ -27,7 +27,7 @@ const App = () => {
           <Route
             exact
             path="/signup"
-            render={props => <Login {...props} setIsAuthed={setIsAuthed} />}
+            render={props => <SignUp {...props} setIsAuthed={setIsAuthed} />}
           ></Route>
           <Route exact path="/user/:id" component={UserPage}></Route>
           <Route path="*" component={NotFound}></Route>

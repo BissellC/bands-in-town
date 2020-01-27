@@ -41,7 +41,11 @@ const EventPage = props => {
           <section className="artist-left">
             <section className="artist-card">
               <div className="main-img-container">
-                <img className="artist-pic" src={artist.artistPic} />
+                <img
+                  className="artist-pic"
+                  src={artist.artistPic}
+                  alt={artist.artistName}
+                />
               </div>
               <p className="artist-name">{artist.artistName}</p>
               <p className="date-venue">
