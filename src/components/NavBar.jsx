@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const NavBar = props => {
   const [results, setResults] = useState([])
-  const [search, setSearch] = useState(0)
+  const [search, setSearch] = useState('')
   const [user, setUser] = useState({})
   const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
@@ -17,10 +17,8 @@ const NavBar = props => {
     const resp = await axios.get(
       'https://bands-in-town-api.herokuapp.com/api/Search/?searchTerm=' + search
     )
-    setResults(resp.data)
-    console.log(results)
-    if (search.length === 1) {
-      setResults([])
+    if (search.length > 0) {
+      setResults(resp.data)
     }
   }
 
@@ -60,7 +58,7 @@ const NavBar = props => {
           <div className="results" id="artists">
             {results.map(artist => {
               return (
-                <div className="dropdown-item">
+                <div onClick={() => setResults([])} className="dropdown-item">
                   <Link to={'/artist/' + artist.id}>
                     <div className="dropdown-item-container">
                       <div className="search-img-container">
@@ -114,7 +112,7 @@ const NavBar = props => {
         <div className="mobile-results" id="artists">
           {results.map(artist => {
             return (
-              <div className="dropdown-item">
+              <div onClick={() => setResults([])} className="dropdown-item">
                 <Link to={'/artist/' + artist.id}>
                   <div className="dropdown-item-container">
                     <div className="search-img-container">
